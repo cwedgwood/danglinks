@@ -70,7 +70,7 @@ func Walk(searchPath string) {
 
 	debugOut("Searching: %s", searchPath)
 
-	filepath.Walk(searchPath, func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(searchPath, func(path string, info os.FileInfo, err error) error {
 
 		if err != nil {
 			if optSilence {
@@ -139,4 +139,8 @@ func Walk(searchPath string) {
 		fmt.Printf("%s → %s\n", path, target)
 		return nil
 	})
+
+	if err != nil {
+		errOut("Walk error: %v\n", err)
+	}
 }

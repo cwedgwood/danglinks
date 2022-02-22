@@ -25,4 +25,8 @@ $(proj): Makefile *.go
 	go build -ldflags="-w -s"
 	go vet
 
-.PHONY: all runtest test format clean
+paranoid:
+	gosec .
+	staticcheck
+
+.PHONY: all runtest test format clean paranoid
